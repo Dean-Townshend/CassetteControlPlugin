@@ -9,16 +9,22 @@
 #pragma once
 
 #include <JuceHeader.h>
+//#include <juce_core/maths/juce_MathsFunctions.h>
+//#include <pluginterfaces/base/ftypes.h>
 
 //==============================================================================
 /**
 */
 class NewProjectAudioProcessor  : public juce::AudioProcessor
 {
-public:
+public:  
     //==============================================================================
     NewProjectAudioProcessor();
     ~NewProjectAudioProcessor() override;
+
+    //Public Variables
+    int ccTempVal0 = 0;
+    int ccVal0 = 0;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;

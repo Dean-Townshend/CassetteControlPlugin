@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -154,6 +146,20 @@ void NewProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 
         // ..do something to the data...
     }
+
+	juce :: MidiBuffer generatedMidi;
+	juce :: MidiMessage m0;
+	
+    midiMessages.clear();
+
+	if (ccVal0 != ccTempVal0)
+	{
+        m0 = juce :: MidiMessage::controllerEvent(1, 1, ccVal0);
+		generatedMidi.addEvent(m0, midiMessages.getLastEventTime());
+	}
+
+	ccTempVal0 = ccVal0;
+    midiMessages.swapWith(generatedMidi);
 }
 
 //==============================================================================
