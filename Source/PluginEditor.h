@@ -26,6 +26,7 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     NewProjectAudioProcessor& audioProcessor;
+    CustLookFeel custLookFeel1;
 
     std::array<juce::Slider, 12> noteTuneSlider;
     std::array<juce::Label, 12> noteTuneSliderLabel;
@@ -33,7 +34,7 @@ private:
     juce::Slider tuningSlider1;
     juce::Label tuningSlider2Label;
 
-    CustLookFeel custLookFeel;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessorEditor)
 };

@@ -15,7 +15,7 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     {
         //Tuning sliders
         noteTuneSlider[i].addListener(this);
-        //tuningSlider.setLookAndFeel(&custLookFeel);
+        noteTuneSlider[i].setLookAndFeel(&custLookFeel1);
         noteTuneSlider[i].setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
         noteTuneSlider[i].setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
         noteTuneSlider[i].setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::slategrey);
@@ -23,6 +23,7 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
         noteTuneSlider[i].setRange(0, 254, 1);
         //tuningSlider.setTextValueSuffix(" ");
         noteTuneSlider[i].setValue(0.0);
+        //custLookFeel1.hello = 1;
 
         //Tuning slider labels
         noteTuneSliderLabel[i].setText("Tune", juce::dontSendNotification);
@@ -31,7 +32,6 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
         addAndMakeVisible(noteTuneSlider[i]);
         addAndMakeVisible(noteTuneSliderLabel[i]);
     }
-
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -54,6 +54,7 @@ void NewProjectAudioProcessorEditor::resized()
 
     std::array < juce::Rectangle<int>, 8> sliderAreas;
     std::array < juce::Rectangle<int>, 8> sliderLabelAreas;
+    std::array < juce::Rectangle<int>, 8> sliderTxtAreas;
 
     for (int i = 0; i < numOfNotes; i++)
     {
@@ -62,13 +63,19 @@ void NewProjectAudioProcessorEditor::resized()
 
     for (int i = 0; i < numOfNotes; i++)
     {
-        sliderLabelAreas[i] = sliderAreas[i].removeFromLeft(sliderAreas[i].getWidth() * 0.4);
+        sliderLabelAreas[i] = sliderAreas[i].removeFromTop(sliderAreas[i].getHeight() * 0.4);
+    }
+
+    for (int i = 0; i < numOfNotes; i++)
+    {
+        sliderTxtAreas[i] = sliderAreas[i].removeFromBottom(sliderAreas[i].getHeight() * 0.2);
     }
 
 
     for (int i = 0; i < numOfNotes; i++)
     {
         noteTuneSlider[i].setBounds(sliderAreas[i]);
+        noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, sliderTxtAreas[i].getWidth(), sliderTxtAreas[i].getHeight() );
         noteTuneSliderLabel[i].setBounds(sliderLabelAreas[i]);
     }
 }

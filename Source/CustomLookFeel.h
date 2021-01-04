@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    CustomLookFeel.h
-    Created: 28 Jul 2020 5:52:25pm
-    Author:  Dean Townshend
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <JuceHeader.h>
 
@@ -18,6 +8,8 @@ public:
     {
         setColour (juce::Slider::thumbColourId, juce::Colours::red);
     }
+
+    int hello;
 
     void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
                            const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider&) override
