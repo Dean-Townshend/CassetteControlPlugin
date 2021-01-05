@@ -25,6 +25,9 @@ private:
     void sliderValueChanged(juce::Slider* slider) override;
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
+
+    juce::MidiKeyboardState keyboardState;
+    juce::MidiKeyboardComponent keyboard;
     NewProjectAudioProcessor& audioProcessor;
     CustLookFeel custLookFeel1;
 
@@ -33,6 +36,7 @@ private:
 
     juce::Slider tuningSlider1;
     juce::Label tuningSlider2Label;
+   
 
     
 

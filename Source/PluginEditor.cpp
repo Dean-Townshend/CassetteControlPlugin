@@ -4,12 +4,13 @@
 
 
 //==============================================================================
-NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioProcessor& p)
+    : AudioProcessorEditor(&p), audioProcessor(p), keyboard(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard)
+
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (1000, 300);
+    setSize(1000, 300);
 
     for (int i = 0; i < numOfNotes; i++)
     {
@@ -26,12 +27,14 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
         //custLookFeel1.hello = 1;
 
         //Tuning slider labels
-        noteTuneSliderLabel[i].setText("Tune", juce::dontSendNotification);
+        noteTuneSliderLabel[i].setText("Note " + (juce::String)(i + 1), juce::dontSendNotification);
         noteTuneSliderLabel[i].setColour(juce::Label::textColourId, juce::Colours::darkslategrey);
 
         addAndMakeVisible(noteTuneSlider[i]);
         addAndMakeVisible(noteTuneSliderLabel[i]);
     }
+
+    //addAndMakeVisible(keyboard);
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -48,7 +51,7 @@ void NewProjectAudioProcessorEditor::resized()
 {
     juce::Rectangle<int> area = getLocalBounds();
 
-    juce::Rectangle<int> sliderArea = area.removeFromTop(area.getHeight());
+    juce::Rectangle<int> sliderArea = area.removeFromTop(area.getHeight()*0.8);
 
     int numOfNoteSliders = sliderArea.getWidth()/numOfNotes;
 
@@ -78,7 +81,13 @@ void NewProjectAudioProcessorEditor::resized()
         noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, sliderTxtAreas[i].getWidth(), sliderTxtAreas[i].getHeight() );
         noteTuneSliderLabel[i].setBounds(sliderLabelAreas[i]);
     }
+    //Rectangle<int> keyboardArea = area);
+    
+    addAndMakeVisible(keyboard);
+    keyboard.setBounds(area);
+    
 }
+
 void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
     if (slider == &tuningSlider1)
