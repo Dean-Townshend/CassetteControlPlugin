@@ -4,7 +4,7 @@
 
 
 //==============================================================================
-NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioProcessor& p)
+NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(CassetteControlProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p), keyboard(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard)
 
 {
@@ -90,7 +90,8 @@ void NewProjectAudioProcessorEditor::resized()
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    if (slider == &tuningSlider1)
+    if (slider == &noteTuneSlider[0])
     {
+        audioProcessor.ccVal0 = noteTuneSlider[0].getValue();
     }
 }

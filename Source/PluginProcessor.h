@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
@@ -15,12 +7,12 @@
 //==============================================================================
 /**
 */
-class NewProjectAudioProcessor  : public juce::AudioProcessor
+class CassetteControlProcessor  : public juce::AudioProcessor
 {
 public:  
     //==============================================================================
-    NewProjectAudioProcessor();
-    ~NewProjectAudioProcessor() override;
+    CassetteControlProcessor();
+    ~CassetteControlProcessor() override;
 
     //Public Variables
     int ccTempVal0 = 0;
@@ -61,5 +53,5 @@ public:
 
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CassetteControlProcessor)
 };

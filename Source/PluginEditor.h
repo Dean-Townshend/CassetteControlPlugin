@@ -9,7 +9,7 @@
 class NewProjectAudioProcessorEditor  : public juce::AudioProcessorEditor, private juce::Slider::Listener
 {
 public:
-    NewProjectAudioProcessorEditor (NewProjectAudioProcessor&);
+    NewProjectAudioProcessorEditor (CassetteControlProcessor&);
     ~NewProjectAudioProcessorEditor() override;
 
 
@@ -28,14 +28,14 @@ private:
 
     juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboard;
-    NewProjectAudioProcessor& audioProcessor;
+    CassetteControlProcessor& audioProcessor;
     CustLookFeel custLookFeel1;
 
     std::array<juce::Slider, 12> noteTuneSlider;
     std::array<juce::Label, 12> noteTuneSliderLabel;
 
-    juce::Slider tuningSlider1;
-    juce::Label tuningSlider2Label;
+    //juce::Slider tuningSlider1;
+    //juce::Label tuningSlider2Label;
    
 
     
