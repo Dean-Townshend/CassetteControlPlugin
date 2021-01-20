@@ -4,7 +4,7 @@
 
 
 //==============================================================================
-NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(CassetteControlProcessor& p)
+CassetteControlProcessorEditor::CassetteControlProcessorEditor(CassetteControlProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p), keyboard(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard)
 
 {
@@ -21,7 +21,7 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(CassetteControlPr
         noteTuneSlider[i].setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
         noteTuneSlider[i].setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::slategrey);
         noteTuneSlider[i].setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::darkslategrey);
-        noteTuneSlider[i].setRange(0, 254, 1);
+        noteTuneSlider[i].setRange(0, 127, 1);
         //tuningSlider.setTextValueSuffix(" ");
         noteTuneSlider[i].setValue(0.0);
         //custLookFeel1.hello = 1;
@@ -37,17 +37,17 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(CassetteControlPr
     //addAndMakeVisible(keyboard);
 }
 
-NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
+CassetteControlProcessorEditor::~CassetteControlProcessorEditor()
 {
 }
 
 //==============================================================================
-void NewProjectAudioProcessorEditor::paint (juce::Graphics& g)
+void CassetteControlProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::lightgrey);
 }
 
-void NewProjectAudioProcessorEditor::resized()
+void CassetteControlProcessorEditor::resized()
 {
     juce::Rectangle<int> area = getLocalBounds();
 
@@ -88,10 +88,14 @@ void NewProjectAudioProcessorEditor::resized()
     
 }
 
-void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
+void CassetteControlProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
-    if (slider == &noteTuneSlider[0])
+    for (int i = 0; i < 12; i++)
     {
-        audioProcessor.ccVal0 = noteTuneSlider[0].getValue();
+        if (slider == &noteTuneSlider[i])
+        {
+            DBG("slider " << i << ": " << noteTuneSlider[i].getValue());
+            audioProcessor.noteTuneMidiVal[i] = noteTuneSlider[i].getValue();
+        }
     }
 }

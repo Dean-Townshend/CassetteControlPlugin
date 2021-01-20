@@ -6,11 +6,11 @@
 
 #define NUMOFNOTES 
 
-class NewProjectAudioProcessorEditor  : public juce::AudioProcessorEditor, private juce::Slider::Listener
+class CassetteControlProcessorEditor  : public juce::AudioProcessorEditor, private juce::Slider::Listener
 {
 public:
-    NewProjectAudioProcessorEditor (CassetteControlProcessor&);
-    ~NewProjectAudioProcessorEditor() override;
+    CassetteControlProcessorEditor (CassetteControlProcessor&);
+    ~CassetteControlProcessorEditor() override;
 
 
     const int numOfNotes = 8;
@@ -40,5 +40,5 @@ private:
 
     
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CassetteControlProcessorEditor)
 };

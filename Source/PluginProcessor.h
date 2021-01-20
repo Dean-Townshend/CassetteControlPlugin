@@ -15,9 +15,8 @@ public:
     ~CassetteControlProcessor() override;
 
     //Public Variables
-    int ccTempVal0 = 0;
-    int ccVal0 = 0;
-
+    std::array<int, 12> noteTuneMidiVal;
+    std::array<int, 12> tempNoteTuneMidiVal;
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;

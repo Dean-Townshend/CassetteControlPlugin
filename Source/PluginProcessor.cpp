@@ -147,18 +147,23 @@ void CassetteControlProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         // ..do something to the data...
     }
 
-	juce :: MidiBuffer generatedMidi;
+	juce :: MidiBuffer generatedMidi = midiMessages;
 	juce :: MidiMessage m0;
+
+    //juce::MidiRPNGenerator::generate(1, 0, 0, true, true);
 	
-    midiMessages.clear();
+    //midiMessages.clear();
 
-	if (ccVal0 != ccTempVal0)
-	{
-        m0 = juce :: MidiMessage::controllerEvent(1, 1, ccVal0);
-		generatedMidi.addEvent(m0, midiMessages.getLastEventTime());
-	}
-
-	ccTempVal0 = ccVal0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (noteTuneMidiVal[i] != tempNoteTuneMidiVal[i])
+        {
+            m0 = juce::MidiMessage::controllerEvent(1, i, noteTuneMidiVal[i]);
+            generatedMidi.addEvent(m0, generatedMidi.getLastEventTime());
+        }
+        tempNoteTuneMidiVal[i] = noteTuneMidiVal[i];
+    }
+	
     midiMessages.swapWith(generatedMidi);
 }
 
@@ -170,7 +175,7 @@ bool CassetteControlProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* CassetteControlProcessor::createEditor()
 {
-    return new NewProjectAudioProcessorEditor (*this);
+    return new CassetteControlProcessorEditor (*this);
 }
 
 //==============================================================================
