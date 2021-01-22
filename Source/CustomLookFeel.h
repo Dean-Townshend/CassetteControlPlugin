@@ -9,8 +9,6 @@ public:
         setColour (juce::Slider::thumbColourId, juce::Colours::red);
     }
 
-    int hello;
-
     void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
                            const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider&) override
     {
@@ -23,15 +21,15 @@ public:
         auto angle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
 
         //Inner fill
-        g.setColour (juce::Colours::lightslategrey);
+        g.setColour (juce::Colours::ghostwhite);
         g.fillEllipse (rx, ry, rw, rw);
 
         //Outline
-        g.setColour (juce::Colours::darkslategrey);
-        g.drawEllipse (rx, ry, rw, rw, 1.5f);
+        g.setColour (juce::Colours::darkgrey);
+        g.drawEllipse (rx, ry, rw, rw, 2.0f);
 
         juce::Path p;
-        auto pointerLength = radius * 0.33f;
+        auto pointerLength = radius * 0.50f;
         auto pointerThickness = 2.5f;
         p.addRectangle (-pointerThickness * 0.5f, -radius, pointerThickness, pointerLength);
         p.applyTransform (juce::AffineTransform::rotation (angle).translated (centreX, centreY));

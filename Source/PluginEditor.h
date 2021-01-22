@@ -13,7 +13,7 @@ public:
     ~CassetteControlProcessorEditor() override;
 
 
-    const int numOfNotes = 8;
+    const int numOfNotes = 12;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -33,12 +33,6 @@ private:
 
     std::array<juce::Slider, 12> noteTuneSlider;
     std::array<juce::Label, 12> noteTuneSliderLabel;
-
-    //juce::Slider tuningSlider1;
-    //juce::Label tuningSlider2Label;
-   
-
-    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CassetteControlProcessorEditor)
 };
