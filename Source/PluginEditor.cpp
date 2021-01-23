@@ -15,24 +15,35 @@ CassetteControlProcessorEditor::CassetteControlProcessorEditor(CassetteControlPr
     for (int i = 0; i < 12; i++)
     {
         //Tuning sliders
-        noteTuneSlider[i].addListener(this);
-        noteTuneSlider[i].setLookAndFeel(&custLookFeel1);
-        noteTuneSlider[i].setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-        noteTuneSlider[i].setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
-        //noteTuneSlider[i].setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::slategrey);
-        noteTuneSlider[i].setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::ghostwhite);
-        noteTuneSlider[i].setRange(0, 127, 1);
-        noteTuneSlider[i].setValue(0.0);
-        
-        
-        //noteTuneSliderLabel[i].setJustificationType(juce::Justification::centred);
-        //Tuning slider labels
-        //noteTuneSliderLabel[i].setText("Note " + (juce::String)(i + 1), juce::dontSendNotification);
-        //noteTuneSliderLabel[i].setColour(juce::Label::textColourId, juce::Colours::black);
-
+        setSliderStyle(noteTuneSlider[i], noteTuneSliderLabel[i]);
         addAndMakeVisible(noteTuneSlider[i]);
         //addAndMakeVisible(noteTuneSliderLabel[i]);
     }
+
+    //Glide Slider
+    setSliderStyle(glideSlider, glideSliderLabel);
+    addAndMakeVisible(glideSlider);
+    addAndMakeVisible(glideSliderLabel);
+
+    //ADSR Sliders
+    setSliderStyle(attackSlider, attackSliderLabel);
+    addAndMakeVisible(attackSlider);
+    addAndMakeVisible(attackSliderLabel);
+
+    setSliderStyle(decaySlider, decaySliderLabel);
+    addAndMakeVisible(decaySlider);
+    addAndMakeVisible(decaySliderLabel);
+
+    setSliderStyle(sustainSlider, sustainSliderLabel);
+    addAndMakeVisible(sustainSlider);
+    addAndMakeVisible(sustainSliderLabel);
+    
+    setSliderStyle(releaseSlider, releaseSliderLabel);
+    addAndMakeVisible(releaseSlider);
+    addAndMakeVisible(releaseSliderLabel);
+
+    //Keyboard
+    addAndMakeVisible(keyboard);
 }
 
 CassetteControlProcessorEditor::~CassetteControlProcessorEditor()
@@ -104,21 +115,45 @@ void CassetteControlProcessorEditor::resized()
         }
     }
 
-    juce::Rectangle<int> keyboardArea = area.removeFromTop(area.getHeight() /4);    
-    
-    //keyboard.setSize(keyboardArea.getWidth(), keyboardArea.getHeight());
-    //keyboard.setBoundsToFit(keyboardArea, juce::Justification::centred, true);
-    //keyboard.setBoundsRelative(keyAreaFloat);
+    //keyboard
+    juce::Rectangle<int> keyboardArea = area.removeFromTop(area.getHeight() * 0.2);
     keyboard.setKeyWidth(keyboardArea.getWidth() / 7);
     keyboard.setBounds(keyboardArea);
     keyboard.setAvailableRange(60, 72);
-    
 
-    //keyboard.setBoundsRelative(1, 1, keyAreaFloat.getWidth(), keyAreaFloat.getHeight());
+    //Glide and ADSR
+    std::array < juce::Rectangle<int>, 4 > ADSRSliderTxtAreas;
+    juce::Rectangle<int> controlArea = area;
 
-    addAndMakeVisible(keyboard);
-    
+    //Glide
+    juce::Rectangle<int> glideControlArea = controlArea.removeFromLeft(controlArea.getWidth() * 0.1);
+    juce::Rectangle<int> glideControlTxtArea = glideControlArea.removeFromBottom(glideControlArea.getHeight() * 0.2);
+    glideSlider.setBounds(glideControlArea);
+    glideSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, glideControlTxtArea.getWidth(), glideControlTxtArea.getHeight());
+
+    //ADSR
+    juce::Rectangle<int> ADSRControlArea = controlArea;
+    std::array < juce::Rectangle<int>, 4 > ADSRSliderAreas;
+    std::array < juce::Rectangle<int>, 4 > ADSRSliderTxtAreas;
+
+    int ADSRSliderIndivWidth = ADSRControlArea.getWidth() / 4;
+
+    for (int i = 0; i < 4; i++)
+    {
+        ADSRSliderAreas[i]= ADSRControlArea.removeFromLeft(ADSRSliderIndivWidth);
+        ADSRSliderTxtAreas[i] = ADSRSliderAreas[i].removeFromBottom(ADSRSliderAreas[i].getHeight() * 0.2);
+    }
+
+    attackSlider.setBounds(ADSRSliderAreas[0]);
+    attackSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, ADSRSliderTxtAreas[0].getWidth(), ADSRSliderTxtAreas[0].getHeight());
+    decaySlider.setBounds(ADSRSliderAreas[1]);
+    decaySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, ADSRSliderTxtAreas[1].getWidth(), ADSRSliderTxtAreas[1].getHeight());
+    sustainSlider.setBounds(ADSRSliderAreas[2]);
+    sustainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, ADSRSliderTxtAreas[2].getWidth(), ADSRSliderTxtAreas[2].getHeight());
+    releaseSlider.setBounds(ADSRSliderAreas[3]);
+    releaseSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, ADSRSliderTxtAreas[3].getWidth(), ADSRSliderTxtAreas[3].getHeight());
 }
+
 
 void CassetteControlProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
@@ -130,4 +165,20 @@ void CassetteControlProcessorEditor::sliderValueChanged(juce::Slider* slider)
             audioProcessor.noteTuneMidiVal[i] = noteTuneSlider[i].getValue();
         }
     }
+}
+
+void CassetteControlProcessorEditor::setSliderStyle(juce::Slider& slider, juce::Label& label)
+{
+    slider.addListener(this);
+    slider.setLookAndFeel(&custLookFeel1);
+    slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
+    //slider.setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::slategrey);
+    slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::ghostwhite);
+    slider.setRange(0, 127, 1);
+    slider.setValue(0.0);
+
+    label.setJustificationType(juce::Justification::centred);
+    //label.setText("Note " + (juce::String)(i + 1), juce::dontSendNotification);
+    label.setColour(juce::Label::textColourId, juce::Colours::black);
 }
