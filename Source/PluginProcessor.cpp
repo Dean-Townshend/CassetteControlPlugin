@@ -148,7 +148,7 @@ void CassetteControlProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     }
 
 	juce :: MidiBuffer generatedMidi = midiMessages;
-	juce :: MidiMessage m0;
+	juce :: MidiMessage m0, m2, m3;
 
     //juce::MidiRPNGenerator::generate(1, 0, 0, true, true);
 	
@@ -163,6 +163,20 @@ void CassetteControlProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         }
         tempNoteTuneMidiVal[i] = noteTuneMidiVal[i];
     }
+    if (glideMidiVal != tempGlideMidiVal)
+    {
+        m2 = juce::MidiMessage::controllerEvent(1, 13, glideMidiVal);
+        generatedMidi.addEvent(m2, generatedMidi.getLastEventTime());
+       
+    }
+    if (flutterMidiVal != tempFlutterMidiVal)
+    {
+        m3 = juce::MidiMessage::controllerEvent(1, 13, flutterMidiVal);
+        generatedMidi.addEvent(m3, generatedMidi.getLastEventTime());
+        
+    }
+    tempGlideMidiVal = glideMidiVal;
+    tempFlutterMidiVal = flutterMidiVal;
 	
     midiMessages.swapWith(generatedMidi);
 }

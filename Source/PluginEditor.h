@@ -10,6 +10,7 @@ public:
     CassetteControlProcessorEditor (CassetteControlProcessor&);
     ~CassetteControlProcessorEditor() override;
 
+    juce::ComponentBoundsConstrainer constrain;
 
     const int numOfNotes = 12;
 
@@ -38,6 +39,10 @@ private:
     //Glider Slider
     juce::Slider glideSlider;
     juce::Label glideSliderLabel;
+
+    //Flutter Slider
+    juce::Slider flutterSlider;
+    juce::Label flutterSliderLabel;
 
     //ADSR Sliders
     juce::Slider attackSlider;

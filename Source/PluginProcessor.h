@@ -17,6 +17,10 @@ public:
     //Public Variables
     std::array<int, 12> noteTuneMidiVal;
     std::array<int, 12> tempNoteTuneMidiVal;
+
+    int glideMidiVal, tempGlideMidiVal, flutterMidiVal, tempFlutterMidiVal;
+
+
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
