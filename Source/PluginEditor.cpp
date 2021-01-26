@@ -63,6 +63,7 @@ CassetteControlProcessorEditor::CassetteControlProcessorEditor(CassetteControlPr
     addAndMakeVisible(releaseSliderLabel);
 
     //Keyboard
+    keyboard.setAvailableRange(60, 72); //One octave 
     addAndMakeVisible(keyboard);
 }
 
@@ -74,90 +75,92 @@ CassetteControlProcessorEditor::~CassetteControlProcessorEditor()
 void CassetteControlProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::dimgrey);
+    
 }
 
 void CassetteControlProcessorEditor::resized()
 {
-
+    //Maintain aspect ratio
     setResizeLimits(getWidth()/getWidth(), getWidth() / 1.6, getHeight() * 2, getWidth() / 1.6);
+    
+    
+    //Create rectangle that will portioned out into smalled rectangles used for placing GUI comps
     juce::Rectangle<int> area = getLocalBounds();
 
-    juce::Rectangle<int> sliderArea = area.removeFromTop(area.getHeight() * 0.4);
+    juce::Rectangle<int> RotaryArea = area.removeFromTop(area.getHeight() * 0.4);
 
-    juce::Rectangle<int> upperSliderArea = sliderArea.removeFromTop(sliderArea.getHeight() / 2);
 
-    juce::Rectangle<int> lowerSliderArea = sliderArea;
+    //Creating a gid of rectangles making placing the offset rotaries easier
+    juce::Rectangle<int> upperRotaryArea = RotaryArea.removeFromTop(RotaryArea.getHeight() / 2);
+    juce::Rectangle<int> lowerRotaryArea = RotaryArea;
+    int cellWidth = lowerRotaryArea.getWidth()/12;
 
-    int cellWidth = lowerSliderArea.getWidth()/12;
+    //Upper rotaries 
+    std::array < juce::Rectangle<int>, 12> upperRotaryAreas;
+    std::array < juce::Rectangle<int>, 12> upperRotaryTxtAreas;
+    std::array < juce::Rectangle<int>, 12> upperRotaryLabelAreas;
 
-    //lower
-    std::array < juce::Rectangle<int>, 12> lowerSliderAreas;
-    std::array < juce::Rectangle<int>, 12> lowerSliderTxtAreas;
-    std::array < juce::Rectangle<int>, 12> lowerSliderLabelAreas;
-
-    //upper
-    std::array < juce::Rectangle<int>, 12> upperSliderAreas;
-    std::array < juce::Rectangle<int>, 12> upperSliderTxtAreas;
-    std::array < juce::Rectangle<int>, 12> upperSliderLabelAreas;
-
+    //Lower rotaries
+    std::array < juce::Rectangle<int>, 12> lowerRotaryAreas;
+    std::array < juce::Rectangle<int>, 12> lowerRotaryTxtAreas;
+    std::array < juce::Rectangle<int>, 12> lowerRotaryLabelAreas;
+    
+    //Creating grid cells
     for (int i = 0; i < 12; i++)
     {
-        upperSliderAreas[i] = upperSliderArea.removeFromLeft(cellWidth);
-        lowerSliderAreas[i] = lowerSliderArea.removeFromLeft(cellWidth);
+        upperRotaryAreas[i] = upperRotaryArea.removeFromLeft(cellWidth);
+        lowerRotaryAreas[i] = lowerRotaryArea.removeFromLeft(cellWidth);
 
-
-        upperSliderLabelAreas[i] = upperSliderAreas[i].removeFromTop(upperSliderAreas[i].getHeight() * 0.1);
-        lowerSliderLabelAreas[i] = lowerSliderAreas[i].removeFromTop(lowerSliderAreas[i].getHeight() * 0.1);
-        upperSliderTxtAreas[i] = upperSliderAreas[i].removeFromBottom(upperSliderAreas[i].getHeight() * 0.2);
-        lowerSliderTxtAreas[i] = lowerSliderAreas[i].removeFromBottom(lowerSliderAreas[i].getHeight() * 0.2);
+        upperRotaryLabelAreas[i] = upperRotaryAreas[i].removeFromTop(upperRotaryAreas[i].getHeight() * 0.1);
+        lowerRotaryLabelAreas[i] = lowerRotaryAreas[i].removeFromTop(lowerRotaryAreas[i].getHeight() * 0.1);
+        upperRotaryTxtAreas[i] = upperRotaryAreas[i].removeFromBottom(upperRotaryAreas[i].getHeight() * 0.2);
+        lowerRotaryTxtAreas[i] = lowerRotaryAreas[i].removeFromBottom(lowerRotaryAreas[i].getHeight() * 0.2);
     }
 
+    //Set GUI rotaies to grid cells, if else conditions used for offseting rotaries
     for (int i = 0; i < 12; i++)
     {
         if (i <= 4)
         {
             if (i == 0 || i % 2 == 0)
             {
-                noteTuneSlider[i].setBounds(lowerSliderAreas[i]);
-                noteTuneSliderLabel[i].setBounds(lowerSliderLabelAreas[i]);
-                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, lowerSliderTxtAreas[i].getWidth(), lowerSliderTxtAreas[i].getHeight());
+                noteTuneSlider[i].setBounds(lowerRotaryAreas[i]);
+                noteTuneSliderLabel[i].setBounds(lowerRotaryLabelAreas[i]);
+                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, lowerRotaryTxtAreas[i].getWidth(), lowerRotaryTxtAreas[i].getHeight());
             }
             else if (i % 2 != 0)
             {
-                noteTuneSlider[i].setBounds(upperSliderAreas[i]);
-                noteTuneSliderLabel[i].setBounds(upperSliderLabelAreas[i]);
-                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, upperSliderTxtAreas[i].getWidth(), upperSliderTxtAreas[i].getHeight());
+                noteTuneSlider[i].setBounds(upperRotaryAreas[i]);
+                noteTuneSliderLabel[i].setBounds(upperRotaryLabelAreas[i]);
+                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, upperRotaryTxtAreas[i].getWidth(), upperRotaryTxtAreas[i].getHeight());
             }
         }
         else if(i > 4)
         {
             if (i % 2 != 0)
             {
-                noteTuneSlider[i].setBounds(lowerSliderAreas[i]);
-                noteTuneSliderLabel[i].setBounds(lowerSliderLabelAreas[i]);
-                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, lowerSliderTxtAreas[i].getWidth(), lowerSliderTxtAreas[i].getHeight());
+                noteTuneSlider[i].setBounds(lowerRotaryAreas[i]);
+                noteTuneSliderLabel[i].setBounds(lowerRotaryLabelAreas[i]);
+                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, lowerRotaryTxtAreas[i].getWidth(), lowerRotaryTxtAreas[i].getHeight());
             }
             else if (i % 2 == 0)
             {
-                noteTuneSlider[i].setBounds(upperSliderAreas[i]);
-                noteTuneSliderLabel[i].setBounds(upperSliderLabelAreas[i]);
-                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, upperSliderTxtAreas[i].getWidth(), upperSliderTxtAreas[i].getHeight());
+                noteTuneSlider[i].setBounds(upperRotaryAreas[i]);
+                noteTuneSliderLabel[i].setBounds(upperRotaryLabelAreas[i]);
+                noteTuneSlider[i].setTextBoxStyle(juce::Slider::TextBoxBelow, false, upperRotaryTxtAreas[i].getWidth(), upperRotaryTxtAreas[i].getHeight());
                 
             }
 
         }
         noteTuneSliderLabel[i].setFont(juce::Font(float(noteTuneSliderLabel[i].getHeight()) * 1.5));
-        
     }
 
     //keyboard
-    juce::Rectangle<int> keyboardArea = area.removeFromTop(area.getHeight() * 0.15);
-    keyboard.setKeyWidth(keyboardArea.getWidth() / 7);
+    juce::Rectangle<int> keyboardArea = area.removeFromTop(area.getHeight() * 0.20);
+    keyboard.setKeyWidth(keyboardArea.getWidth() / 7); //7 white keys
     keyboard.setBounds(keyboardArea);
-    keyboard.setAvailableRange(60, 72);
 
     //Glide and ADSR
-    //std::array < juce::Rectangle<int>, 4 > ADSRSliderTxtAreas;
     juce::Rectangle<int> controlArea = area;
 
     //Glide
@@ -165,6 +168,7 @@ void CassetteControlProcessorEditor::resized()
     juce::Rectangle<int> glideControlArea = adjControlArea.removeFromLeft(adjControlArea.getWidth()/2);
     juce::Rectangle<int> glideControlLabelArea = glideControlArea.removeFromTop(glideControlArea.getHeight() * 0.2);
     juce::Rectangle<int> glideControlTxtArea = glideControlArea.removeFromBottom(glideControlArea.getHeight() * 0.2);
+    
     glideSlider.setBounds(glideControlArea);
     glideSliderLabel.setBounds(glideControlLabelArea);
     glideSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, glideControlTxtArea.getWidth(), glideControlTxtArea.getHeight());
@@ -245,7 +249,7 @@ void CassetteControlProcessorEditor::setSliderStyle(juce::Slider& slider, juce::
     //slider.setColour(juce::Slider::textBoxBackgroundColourId, juce::Colours::slategrey);
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::ghostwhite);
     slider.setRange(0, 127, 1);
-    slider.setValue(0.0);
+    slider.setValue(57.0);
 
     label.setJustificationType(juce::Justification::centred);
     //label.setText("Note " + (juce::String)(i + 1), juce::dontSendNotification);

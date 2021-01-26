@@ -17,6 +17,7 @@ public:
     //Public Variables
     std::array<int, 12> noteTuneMidiVal;
     std::array<int, 12> tempNoteTuneMidiVal;
+    juce::ADSR adsr;
 
     int glideMidiVal, tempGlideMidiVal, flutterMidiVal, tempFlutterMidiVal;
 
@@ -55,6 +56,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CassetteControlProcessor)
 };

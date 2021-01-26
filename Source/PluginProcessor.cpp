@@ -14,6 +14,7 @@ CassetteControlProcessor::CassetteControlProcessor()
                        )
 #endif
 {
+    
 }
 
 CassetteControlProcessor::~CassetteControlProcessor()
@@ -87,6 +88,10 @@ void CassetteControlProcessor::prepareToPlay (double sampleRate, int samplesPerB
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    adsr.setSampleRate(sampleRate);
+    juce::ADSR::Parameters adsrparams = { 3, 1, 2, 4 };
+    adsr.setParameters(adsrparams);
+   
 }
 
 void CassetteControlProcessor::releaseResources()
@@ -142,17 +147,15 @@ void CassetteControlProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+        auto* channelData = buffer.getWritePointer(channel);
 
         // ..do something to the data...
+
+        
     }
 
-	juce :: MidiBuffer generatedMidi = midiMessages;
-	juce :: MidiMessage m0, m2, m3;
-
-    //juce::MidiRPNGenerator::generate(1, 0, 0, true, true);
-	
-    //midiMessages.clear();
+    juce::MidiBuffer generatedMidi = midiMessages;
+    juce::MidiMessage m0, m2, m3;
 
     for (int i = 0; i < 12; i++)
     {
@@ -167,17 +170,17 @@ void CassetteControlProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     {
         m2 = juce::MidiMessage::controllerEvent(1, 13, glideMidiVal);
         generatedMidi.addEvent(m2, generatedMidi.getLastEventTime());
-       
+
     }
     if (flutterMidiVal != tempFlutterMidiVal)
     {
-        m3 = juce::MidiMessage::controllerEvent(1, 13, flutterMidiVal);
+        m3 = juce::MidiMessage::controllerEvent(1, 14, flutterMidiVal);
         generatedMidi.addEvent(m3, generatedMidi.getLastEventTime());
-        
+
     }
     tempGlideMidiVal = glideMidiVal;
     tempFlutterMidiVal = flutterMidiVal;
-	
+
     midiMessages.swapWith(generatedMidi);
 }
 

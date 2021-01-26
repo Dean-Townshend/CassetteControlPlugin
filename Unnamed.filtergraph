@@ -1,52 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FILTERGRAPH>
-  <FILTER uid="1" x="0.0925" y="0.2360515021459227" DPIAware="0.0">
-    <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
-            manufacturer="JUCE" version="1.0" file="" uid="246006c0" isInstrument="0"
-            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
-            isShell="0"/>
-    <STATE>0.</STATE>
+  <FILTER uid="10" x="0.235" y="0.2124463519313305" DPIAware="0.0" uiLastX_Normal="258"
+          uiLastY_Normal="38" uiopen_Normal="1">
+    <PLUGIN name="CassetteControl" format="VST3" category="Fx" manufacturer="Sterling"
+            version="1.0.0" file="D:\JucePlugins\CassetteControl\Builds\VisualStudio2019\x64\Debug\VST3\NewProject.vst3"
+            uid="e956a93a" isInstrument="0" fileTime="17737b4762a" infoUpdateTime="1773bfafbd4"
+            numInputs="2" numOutputs="2" isShell="0"/>
+    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
     <LAYOUT>
       <INPUTS>
-        <BUS index="0" layout="disabled"/>
+        <BUS index="0" layout="L R"/>
       </INPUTS>
       <OUTPUTS>
         <BUS index="0" layout="L R"/>
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="2" x="0.17375" y="0.09656652360515021" DPIAware="0.0">
-    <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
-            manufacturer="JUCE" version="1.0" file="" uid="a9e4f9eb" isInstrument="0"
-            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
-            isShell="0"/>
-    <STATE>0.</STATE>
-    <LAYOUT>
-      <INPUTS>
-        <BUS index="0" layout="disabled"/>
-      </INPUTS>
-      <OUTPUTS>
-        <BUS index="0" layout="disabled"/>
-      </OUTPUTS>
-    </LAYOUT>
-  </FILTER>
-  <FILTER uid="3" x="0.07375" y="0.6695278969957081" DPIAware="0.0">
-    <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
-            manufacturer="JUCE" version="1.0" file="" uid="724248cb" isInstrument="0"
-            fileTime="0" infoUpdateTime="0" numInputs="2" numOutputs="0"
-            isShell="0"/>
-    <STATE>0.</STATE>
-    <LAYOUT>
-      <INPUTS>
-        <BUS index="0" layout="L R"/>
-      </INPUTS>
-      <OUTPUTS>
-        <BUS index="0" layout="disabled"/>
-      </OUTPUTS>
-    </LAYOUT>
-  </FILTER>
-  <FILTER uid="4" x="0.10375" y="0.8175965665236051" DPIAware="0.0">
+  <FILTER uid="11" x="0.26375" y="0.5107296137339056" DPIAware="0.0">
     <PLUGIN name="MIDI Output" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="9d5bbb00" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
@@ -61,35 +32,21 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="5" x="0.12" y="0.4399141630901288" DPIAware="0.0" uiLastX_Normal="403"
-          uiLastY_Normal="103" uiopen_Normal="1">
-    <PLUGIN name="CassetteControl" format="VST3" category="Fx" manufacturer="Sterling"
-            version="1.0.0" file="D:\JucePlugins\CassetteControl\Builds\VisualStudio2019\x64\Debug\VST3\NewProject.vst3"
-            uid="e956a93a" isInstrument="0" fileTime="17730661c21" infoUpdateTime="17730664443"
-            numInputs="2" numOutputs="2" isShell="0"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+  <FILTER uid="12" x="0.27625" y="0.03862660944206009" DPIAware="">
+    <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uid="a9e4f9eb" isInstrument="0"
+            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
+            isShell="0"/>
+    <STATE>0.</STATE>
     <LAYOUT>
       <INPUTS>
-        <BUS index="0" layout="L R"/>
+        <BUS index="0" layout="disabled"/>
       </INPUTS>
       <OUTPUTS>
-        <BUS index="0" layout="L R"/>
+        <BUS index="0" layout="disabled"/>
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="6" x="0.1975" y="0.5515021459227468" DPIAware="0.0" uiLastX_Normal="43"
-          uiLastY_Normal="66" uiopen_Normal="1">
-    <PLUGIN name="MIDI Logger" format="Internal" category="Synth" manufacturer="JUCE"
-            version="1.0.0" file="MIDI Logger" uid="97e2978f" isInstrument="1"
-            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
-            isShell="0"/>
-    <STATE>98.VMjLgjE....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOyQWXzUlO7TWZSQWXzUFH2kFYzgVOhTCLvHBHnUVZmgFc8HxLv.iHu3COuLGcgQWY9..</STATE>
-    <LAYOUT>
-      <INPUTS/>
-      <OUTPUTS/>
-    </LAYOUT>
-  </FILTER>
-  <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="5" dstChannel="4096"/>
-  <CONNECTION srcFilter="5" srcChannel="4096" dstFilter="6" dstChannel="4096"/>
-  <CONNECTION srcFilter="6" srcChannel="4096" dstFilter="4" dstChannel="4096"/>
+  <CONNECTION srcFilter="10" srcChannel="4096" dstFilter="11" dstChannel="4096"/>
+  <CONNECTION srcFilter="12" srcChannel="4096" dstFilter="10" dstChannel="4096"/>
 </FILTERGRAPH>
