@@ -28,10 +28,10 @@ CassetteControlProcessorEditor::CassetteControlProcessorEditor(CassetteControlPr
     addAndMakeVisible(glideSliderLabel);
 
     //flutter Slider
-    setSliderStyle(flutterSlider, flutterSliderLabel);
-    flutterSliderLabel.setText("Flutter", juce::dontSendNotification);
-    addAndMakeVisible(flutterSlider);
-    addAndMakeVisible(flutterSliderLabel);
+    setSliderStyle(minSpeedSlider, minSpeedSliderLabel);
+    minSpeedSliderLabel.setText("Min Speed", juce::dontSendNotification);
+    addAndMakeVisible(minSpeedSlider);
+    addAndMakeVisible(minSpeedSliderLabel);
 
     //ADSR Sliders
     setSliderStyle(attackSlider, attackSliderLabel);
@@ -178,10 +178,10 @@ void CassetteControlProcessorEditor::resized()
     juce::Rectangle<int> flutterControlArea = adjControlArea;
     juce::Rectangle<int> flutterControlLabelArea = flutterControlArea.removeFromTop(flutterControlArea.getHeight() * 0.2);
     juce::Rectangle<int> flutterControlTxtArea = flutterControlArea.removeFromBottom(flutterControlArea.getHeight() * 0.2);
-    flutterSlider.setBounds(flutterControlArea);
-    flutterSliderLabel.setBounds(flutterControlLabelArea);
-    flutterSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, flutterControlTxtArea.getWidth(), flutterControlTxtArea.getHeight());
-    flutterSliderLabel.setFont(juce::Font(float(flutterSliderLabel.getHeight()/2)));
+    minSpeedSlider.setBounds(flutterControlArea);
+    minSpeedSliderLabel.setBounds(flutterControlLabelArea);
+    minSpeedSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, flutterControlTxtArea.getWidth(), flutterControlTxtArea.getHeight());
+    minSpeedSliderLabel.setFont(juce::Font(float(minSpeedSliderLabel.getHeight()/2)));
 
     //ADSR
     juce::Rectangle<int> ADSRControlArea = controlArea;
@@ -223,9 +223,9 @@ void CassetteControlProcessorEditor::sliderValueChanged(juce::Slider* slider)
     {
         audioProcessor.glideMidiVal = glideSlider.getValue();
     }
-    else if (slider == &flutterSlider)
+    else if (slider == &minSpeedSlider)
     {
-        audioProcessor.flutterMidiVal = flutterSlider.getValue();
+        audioProcessor.flutterMidiVal = minSpeedSlider.getValue();
     }
     else
     {

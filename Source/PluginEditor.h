@@ -41,8 +41,8 @@ private:
     juce::Label glideSliderLabel;
 
     //Flutter Slider
-    juce::Slider flutterSlider;
-    juce::Label flutterSliderLabel;
+    juce::Slider minSpeedSlider;
+    juce::Label minSpeedSliderLabel;
 
     //ADSR Sliders
     juce::Slider attackSlider;
