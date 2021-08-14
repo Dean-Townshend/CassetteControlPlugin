@@ -1,4 +1,4 @@
 # CassetteControlPlugin
 ![image](https://user-images.githubusercontent.com/38728500/129430722-c31fdc27-cd7e-4fee-9fb3-c116b7a4cc07.png)
 
-
+This plugin is used in tandem with my Cassette motor controller Arduino sketch to turn a cassette player into a quasi synthesiser.
