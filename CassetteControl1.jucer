@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="n07jcd" name="CassetteControl" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              companyName="Sterling" pluginFormats="buildVST3" pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn">
+              companyName="Sterling" pluginFormats="buildStandalone,buildVST3"
+              pluginCharacteristicsValue="pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="AVMJKK" name="CassetteControl">
     <GROUP id="{973E8E7C-274C-3916-86E0-F3AB4206C5FD}" name="Source">
       <FILE id="K6dOF8" name="PluginProcessor.cpp" compile="1" resource="0"
